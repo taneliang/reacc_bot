@@ -1,3 +1,5 @@
+# dotenv environment variables file
+.env
 
 # Created by https://www.gitignore.io/api/vim,ruby,macos,linux
 # Edit at https://www.gitignore.io/?templates=vim,ruby,macos,linux
