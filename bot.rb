@@ -1,0 +1,40 @@
+require 'dotenv/load'
+require 'telegram/bot'
+
+token = ENV['BOT_TOKEN']
+
+replies = [
+  'LOL',
+  'lol',
+  'Lol',
+  'oh lol',
+  'lmao',
+  'Lmao',
+  'Rip',
+  'rip',
+  'Wew',
+  'wew',
+  'Kek',
+  'kek',
+  'Hahaha',
+  'HAHA',
+  'Hahahaha',
+  'wtf',
+  'Wtf'
+]
+
+def should_send
+  rand(100).zero?
+end
+
+Telegram::Bot::Client.run(token) do |bot|
+  puts 'Started'
+  bot.listen do |message|
+    p message
+    if should_send
+      bot.api.send_message(chat_id: message.chat.id,
+                           reply_to_message_id: message.message_id,
+                           text: replies.sample)
+    end
+  end
+end
