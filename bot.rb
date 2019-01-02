@@ -33,7 +33,7 @@ Telegram::Bot::Client.run(token) do |bot|
   puts 'Started'
   bot.listen do |message|
     p message
-    if should_send
+    if message.text == '/start' || should_send
       bot.api.send_message(chat_id: message.chat.id,
                            reply_to_message_id: message.message_id,
                            text: replies.sample)
