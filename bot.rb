@@ -21,8 +21,13 @@ replies = [
   'Hahahaha',
   'wtf',
   'Wtf',
+  'Nice',
   'H A C K E R M A N',
-  'You should out elitist them!'
+  'You should out elitist them!',
+  'xD',
+  'sgtm',
+  'lgtm',
+  'How about no'
 ]
 
 def should_send
