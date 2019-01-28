@@ -22,16 +22,35 @@ replies = [
   'wtf',
   'Wtf',
   'Nice',
+  'Sick',
+  'issit',
+  'Chey',
+  'wat',
+  'gg',
   'H A C K E R M A N',
   'You should out elitist them!',
   'xD',
   'sgtm',
   'lgtm',
-  'How about no'
+  'How about no',
+  'erm',
+  '^',
+  'cri',
+  'RT',
+  'ded',
+  'damn',
+  '可以吃的吗？',
+  '?',
+  'ah',
+  '/goodbot',
+  '/badbot',
+  '/bigthonk',
+  '/wasted',
+  '...'
 ]
 
 def should_send
-  rand(100).zero?
+  rand(70).zero?
 end
 
 Telegram::Bot::Client.run(token) do |bot|
