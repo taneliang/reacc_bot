@@ -46,7 +46,22 @@ replies = [
   '/badbot',
   '/bigthonk',
   '/wasted',
-  '...'
+  '...',
+  'Lol wtf',
+  'Ikr',
+  ':<',
+  'famous last words',
+  'STOP',
+  'plsno',
+  'ohno',
+  'Uh oh',
+  'No way',
+  'EXCUSE YOU',
+  'I see',
+  '🙃',
+  '😂',
+  'why?',
+  'XD'
 ]
 
 def should_send
