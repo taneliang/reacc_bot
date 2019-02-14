@@ -16,6 +16,7 @@ GEM
     ice_nine (0.11.2)
     inflecto (0.0.2)
     multipart-post (2.0.0)
+    sqlite3 (1.4.0)
     telegram-bot-ruby (0.8.6.1)
       faraday
       inflecto
@@ -32,6 +33,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
+  sqlite3 (~> 1.4)
   telegram-bot-ruby
 
 BUNDLED WITH
