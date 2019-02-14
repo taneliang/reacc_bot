@@ -3,6 +3,7 @@ require 'telegram/bot'
 require './db'
 
 token = ENV['BOT_TOKEN']
+force_trigger_commands = ["/help", '/start', '/reaccplsreacc']
 
 def should_send
   rand(90).zero?
@@ -71,6 +72,12 @@ init_db
 
 Telegram::Bot::Client.run(token) do |bot|
   puts 'Started'
+
+  # Fetch bot data
+  me = bot.api.getMe
+  bot_username = me["result"]["username"]
+  puts "Got bot UNAME #{bot_username} data #{me}"
+
   bot.listen do |message|
     begin
       case message
@@ -80,7 +87,14 @@ Telegram::Bot::Client.run(token) do |bot|
 
       when Telegram::Bot::Types::Message
         log_incoming(message)
-        if message.text == '/help' || message.text == '/start' || should_send
+
+        commands = message.entities
+          .select { |e| e.type == "bot_command" }
+          .map { |e| message.text[e.offset, e.length].split("@") }
+          .select { |c_comps| c_comps[1] == nil || c_comps[1] == bot_username }
+          .map { |c_comps| c_comps.first }
+
+        if (force_trigger_commands & commands).empty? == false || should_send
           reacction = File.readlines('reaccs.txt').sample
           reacction.strip!
           reacc_msg = bot.api.send_message(chat_id: message.chat.id,
