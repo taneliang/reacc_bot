@@ -7,23 +7,35 @@ def should_send
   rand(90).zero?
 end
 
+def user_to_logstr(user)
+  return "" unless user
+  "UNAME #{user.username}"
+end
+
+def msg_to_logstr(message)
+  return "" unless message
+  "MSGTXT \"#{message.text}\" FROM #{user_to_logstr(message.from)} DATE #{message.date} TYPE #{message.chat&.type} TITLE \"#{message.chat&.title}\" CHATID #{message.chat&.id}"
+end
+
 def log_incoming(message)
-  puts "MSG: \"#{message.text}\" ||| #{message.from&.username} #{message.date} #{message.chat&.type} \"#{message.chat&.title}\" #{message.chat&.id}"
+  puts "MSG: #{msg_to_logstr(message)}"
 end
 
 def log_reacc(trigger_msg, reacc_msg)
   if !reacc_msg["ok"]
-    puts "Reaction to #{message.chat&.id} failed to send"
+    puts "REACCFAIL: Reaction to #{message.chat&.id} failed to send"
     return
   end
 
-  puts "REACC: \"#{trigger_msg.text}\" -> \"#{reacc_msg["result"]["text"]}\" ||| #{trigger_msg.from&.username} #{trigger_msg.date} #{trigger_msg.chat&.type} \"#{trigger_msg.chat&.title}\" #{trigger_msg.chat&.id} #{reacc_msg["result"]["message_id"]}"
+  puts "REACC: \"#{trigger_msg.text}\" -> \"#{reacc_msg["result"]["text"]}\" REACCMSGID #{reacc_msg["result"]["message_id"]} ||| TRIGGER #{msg_to_logstr(trigger_msg)}"
 
   # TODO: Store reaction
 end
 
 def handle_feedback(feedback_msg)
-  puts "FEEDBACK: To \"#{feedback_msg.message.text}\" #{feedback_msg.data} ID #{feedback_msg.id} OrigMsgID #{feedback_msg.message.message_id} ||| #{feedback_msg.message.from&.username} #{feedback_msg.message.date} #{feedback_msg.message.chat&.type} \"#{feedback_msg.message.chat&.title}\" #{feedback_msg.message.chat&.id}"
+  puts "FEEDBACK: #{feedback_msg.data} FEEDBID #{feedback_msg.id} ||| REACC #{msg_to_logstr(feedback_msg.message)} ||| TRIGGER #{msg_to_logstr(feedback_msg.message&.reply_to_message)}"
+  # TODO: Store feedback
+  # TODO: Edit reacc with feedback score
 end
 
 reply_keyboard = [[
