@@ -61,11 +61,24 @@ replies = [
   '🙃',
   '😂',
   'why?',
-  'XD'
+  'XD',
+  'Same lel',
+  'seriously?',
+  'Really meh hahaha',
+  'For now',
+  'YAY',
+  'Errrok',
+  'Wow rekt',
+  'OH MY GOD',
+  'you_dont_cb.png',
+  'meh',
+  'Fak u',
+  'Diu',
+  '😂ok'
 ]
 
 def should_send
-  rand(70).zero?
+  rand(90).zero?
 end
 
 Telegram::Bot::Client.run(token) do |bot|
